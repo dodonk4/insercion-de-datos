@@ -59,6 +59,27 @@ CREATE TABLE employees(
     PRIMARY KEY (emp_id)
 );
 
+ALTER TABLE places ADD CONSTRAINT adding_forkey_0
+FOREIGN KEY (emp_id) REFERENCES employees(emp_id) ON UPDATE CASCADE;
+
+ALTER TABLE movements ADD CONSTRAINT adding_forkey_mov_0 
+FOREIGN KEY (place_id) REFERENCES places(place_id) ON UPDATE CASCADE ;
+
+ALTER TABLE movements ADD CONSTRAINT adding_forkey_mov_1 
+FOREIGN KEY (prod_id) REFERENCES products(prod_id) ON UPDATE CASCADE ;
+
+ALTER TABLE movements ADD CONSTRAINT adding_forkey_mov_2 
+FOREIGN KEY (emp_id) REFERENCES employees(emp_id) ON UPDATE CASCADE ;
+
+ALTER TABLE products ADD CONSTRAINT adding_forkey_prod_0 
+FOREIGN KEY (distr_id) REFERENCES distributors(distr_id) ON UPDATE CASCADE ;
+
+SET FOREIGN_KEY_CHECKS=0;
+/*
+Esto es para permitirme insertar datos en las Foreign Keys
+Me saltaba error 1452 sino
+ */
+
 INSERT INTO admins (admin_name, admin_pass) values
 ('Gustavo', 'gustav0'),
 ('Alejandra', 'alejandr4'),
@@ -97,24 +118,7 @@ INSERT INTO movements (mov_type, mov_quantity, mov_price, place_id, prod_id, emp
 ('Ingreso', 1, 20000, 2, 8, 1),
 ('Ingreso de Producto', 1, 0, 3, 9, 3);
 
-SET FOREIGN_KEY_CHECKS=0; 
-/*
-Esto es para permitirme insertar datos en las Foreign Keys
-Me saltaba error 1452 sino
- */
 
-ALTER TABLE places ADD CONSTRAINT adding_forkey_0
-FOREIGN KEY (emp_id) REFERENCES employees(emp_id) ON UPDATE CASCADE;
 
-ALTER TABLE movements ADD CONSTRAINT adding_forkey_mov_0 
-FOREIGN KEY (place_id) REFERENCES places(place_id) ON UPDATE CASCADE ;
 
-ALTER TABLE movements ADD CONSTRAINT adding_forkey_mov_1 
-FOREIGN KEY (prod_id) REFERENCES products(prod_id) ON UPDATE CASCADE ;
-
-ALTER TABLE movements ADD CONSTRAINT adding_forkey_mov_2 
-FOREIGN KEY (emp_id) REFERENCES employees(emp_id) ON UPDATE CASCADE ;
-
-ALTER TABLE products ADD CONSTRAINT adding_forkey_prod_0 
-FOREIGN KEY (distr_id) REFERENCES distributors(distr_id) ON UPDATE CASCADE ;
 
